@@ -24,7 +24,7 @@ fecha_fin = '2023-01-01'
 
 datos_acciones, retornos_acciones = obtener_datos_acciones(tickers, fecha_inicio, fecha_fin)
 
-fecha_marcas = datos_acciones.index[::5]
+
 
 
 
@@ -34,7 +34,9 @@ app.layout = html.Div(children=[
 
     dcc.RangeSlider(
         id='date-slider',
-        marks={i: {'label': str(date.strftime('%Y-%m-%d'))} for i, date in enumerate(datos_acciones.index, start=1)},
+        marks={i: {'label': str(date.strftime('%Y-%m-%d')), 'style':{"transform": "rotate(90deg)"}
+                  } for i, date in enumerate(datos_acciones.index, start=1) if i % 15 == 0
+               },
         min=1,
         max=len(datos_acciones),
         step=1,
